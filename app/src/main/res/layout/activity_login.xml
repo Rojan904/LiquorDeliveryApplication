@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="24dp" />
+
 
     <ImageView
         android:id="@+id/image"
@@ -180,6 +182,7 @@
                  android:src="@drawable/ic_google_plus"
                  android:layout_marginLeft="10dp"/>
           </LinearLayout>
+
     <View
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="20dp"
