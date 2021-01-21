@@ -72,7 +72,8 @@
                 <EditText
                     android:id="@+id/etDOB"
                     style="@style/editext"
-                    android:hint="Date Of Birth"/>
+                    android:hint="Date Of Birth"
+                    android:focusable="false"/>
                 <EditText
                     android:id="@+id/etUsername"
                     style="@style/editext"
@@ -98,6 +99,8 @@
                     android:textColor="@color/white"
                     android:textSize="20sp"
                     android:background="@drawable/button_background_blue"/>
+
+
 
 
             </LinearLayout>
