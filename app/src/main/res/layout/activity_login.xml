@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:layout_gravity="center"
-    android:background="@color/black"
     tools:context=".LoginActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -23,43 +22,70 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="24dp" />
 
-    <EditText
+    <ImageView
+        android:id="@+id/image"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
-        android:id="@+id/etUsername"
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/edittext"
-        android:layout_margin="10dp"
-        android:drawableLeft="@drawable/ic_baseline_person_24"
-        android:drawablePadding="10dp"
-        android:padding="15dp"
-        android:maxLines="1"
-        android:hint="Username"
-        android:textColorHint="@color/white"
-        />
+        android:src="@drawable/aila"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/user"
+        app:layout_constraintTop_toBottomOf="@id/image"
+        app:layout_constraintLeft_toLeftOf="@id/guideline_left"
+        app:layout_constraintRight_toRightOf="@id/guideline_right"
+        android:layout_width="wrap_content"
+        android:textColorHint="@color/black"
+        android:layout_height="wrap_content">
+        <EditText
+
+            android:id="@+id/etUsername"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+
+            android:layout_margin="10dp"
+            android:drawableLeft="@drawable/ic_baseline_person_24"
+            android:drawableTint="@color/black"
+            android:drawablePadding="10dp"
+            android:padding="15dp"
+            android:maxLines="1"
+            android:hint="Username"
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pass"
+        app:layout_constraintTop_toBottomOf="@id/user"
+        app:layout_constraintLeft_toLeftOf="@id/guideline_left"
+        app:layout_constraintRight_toRightOf="@id/guideline_right"
+        android:layout_width="wrap_content"
+        android:textColorHint="@color/black"
+        android:layout_height="wrap_content">
     <EditText
-        app:layout_constraintTop_toBottomOf="@id/etUsername"
+        app:layout_constraintTop_toBottomOf="@id/user"
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         android:id="@+id/etPassword"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/edittext"
         android:layout_margin="10dp"
         android:drawableLeft="@drawable/ic_baseline_lock_24"
+        android:drawableTint="@color/black"
         android:drawablePadding="10dp"
         android:padding="15dp"
         android:maxLines="1"
         android:hint="Password"
         android:textColorHint="@color/white"
         android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        app:layout_constraintTop_toBottomOf="@id/etPassword"
+        app:layout_constraintTop_toBottomOf="@id/pass"
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         android:id="@+id/btnLogin"
@@ -83,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Do not have an account?"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="16sp"
             />
         <TextView
@@ -98,23 +124,25 @@
     </LinearLayout>
     <View
         android:id="@+id/line1"
-        android:layout_width="130dp"
+        android:layout_width="0dp"
+        app:layout_constraintHorizontal_weight="2"
         android:layout_height="2dp"
         android:background="#79C5C3C3"
-        app:layout_constraintBottom_toBottomOf="@+id/or"
-        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
-        app:layout_constraintRight_toLeftOf="@id/or"
-        app:layout_constraintTop_toTopOf="@+id/or"
+        app:layout_constraintLeft_toLeftOf="@id/guideline_left"
+     app:layout_constraintBottom_toTopOf="@+id/or"
+        app:layout_constraintTop_toBottomOf="@+id/or"
+        app:layout_constraintRight_toLeftOf="@+id/or"
         app:layout_constraintHorizontal_chainStyle="spread_inside" />
 
     <TextView
         android:id="@+id/or"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        app:layout_constraintHorizontal_weight="5"
         android:layout_height="21dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:text="Or Login With"
         android:gravity="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="@+id/line1"
         app:layout_constraintLeft_toRightOf="@+id/line1"
@@ -123,7 +151,8 @@
         />
     <View
         android:id="@+id/line2"
-        android:layout_width="130dp"
+        android:layout_width="0dp"
+        app:layout_constraintHorizontal_weight="2"
         android:layout_height="2dp"
         android:background="#79C5C3C3"
         app:layout_constraintBottom_toBottomOf="@+id/or"
@@ -131,8 +160,26 @@
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         app:layout_constraintTop_toTopOf="@+id/or"
         app:layout_constraintHorizontal_chainStyle="spread_inside" />
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@+id/or"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:gravity="center"
+             android:orientation="horizontal"
+             android:layout_marginTop="40dp">
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/ic_facebook"/>
+             <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@drawable/ic_google_plus"
+                 android:layout_marginLeft="10dp"/>
+          </LinearLayout>
     <View
-        app:layout_constraintRight_toRightOf="@+id/guideline_right"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="20dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -141,7 +188,7 @@
         android:background="@drawable/ic_side_bg"/>
     <ImageView
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="@id/guideline_right"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
@@ -152,3 +199,167 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--<RelativeLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".LoginActivity"-->
+<!--    android:background="@color/login_bk_color"-->
+<!--    android:focusableInTouchMode="true"-->
+<!--    android:gravity="center"-->
+<!--    android:layout_gravity="center">-->
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_centerInParent="true"-->
+<!--       >-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical"-->
+<!--            android:padding="20dp">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="170dp"-->
+<!--                    android:layout_alignParentTop="true"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:background="@drawable/img_aila"/>-->
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:id="@+id/user"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:textColorHint="@color/black"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/loginViewsMargin">-->
+<!--                    <EditText-->
+<!--                        android:id="@+id/etUsername"-->
+<!--                        android:layout_width="350dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerHorizontal="true"-->
+<!--                        android:background="@drawable/edittext"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:drawableLeft="@drawable/ic_baseline_person_24"-->
+<!--                        android:drawableTint="@color/black"-->
+<!--                        android:drawablePadding="10dp"-->
+<!--                        android:padding="15dp"-->
+<!--                        android:maxLines="1"-->
+<!--                        android:hint="Username"-->
+
+<!--                        />-->
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:id="@+id/pass"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/user"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:textColorHint="@color/black"-->
+<!--                    android:layout_height="wrap_content">-->
+<!--                <EditText-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/user"-->
+<!--                    android:id="@+id/etPassword"-->
+<!--                    android:layout_width="350dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:background="@drawable/edittext"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:drawableLeft="@drawable/ic_baseline_lock_24"-->
+<!--                    android:drawableTint="@color/black"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:padding="15dp"-->
+<!--                    android:maxLines="1"-->
+<!--                    android:hint="Password"-->
+<!--                    android:textColorHint="@color/white"-->
+<!--                    android:inputType="textPassword"/>-->
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
+<!--            <Button-->
+<!--                android:id="@+id/btnLogin"-->
+<!--                android:layout_width="350dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Login"-->
+<!--                android:textSize="20sp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_margin="20dp"-->
+<!--                android:background="@drawable/button_background_blue"/>-->
+
+<!--     <TextView-->
+<!--         style="@style/parent"-->
+<!--         android:textStyle="bold"-->
+<!--         android:textColor="@color/themeColor"-->
+<!--         android:textSize="17sp"-->
+<!--         android:textAlignment="center"-->
+<!--         android:text="New user? Register Now"-->
+<!--         android:gravity="center_horizontal" />-->
+<!--     <LinearLayout-->
+<!--         android:layout_width="match_parent"-->
+<!--         android:layout_height="wrap_content"-->
+<!--         android:weightSum="12"-->
+<!--         android:gravity="center"-->
+<!--         android:layout_marginTop="90dp">-->
+
+<!--         <View-->
+<!--             android:layout_width="0dp"-->
+<!--             android:layout_height="2dp"-->
+<!--             android:background="@color/colorPrimaryDark"-->
+<!--             android:layout_weight="3"/>-->
+
+<!--         <TextView-->
+<!--             style="@style/viewParent.headerText.NoMode"-->
+<!--             android:layout_width="wrap_content"-->
+<!--             android:layout_height="wrap_content"-->
+<!--             android:text="Use other Methods"-->
+<!--             android:layout_weight="5"-->
+<!--             android:textSize="20sp"-->
+<!--             android:textAlignment="center"-->
+<!--             android:gravity="center_horizontal" />-->
+
+<!--         <View-->
+<!--             android:layout_width="0dp"-->
+<!--             android:layout_height="2dp"-->
+<!--             android:background="@color/colorPrimaryDark"-->
+<!--             android:layout_weight="3"/>-->
+
+<!--     </LinearLayout>-->
+
+<!--     <LinearLayout-->
+<!--         android:layout_width="match_parent"-->
+<!--         android:layout_height="wrap_content"-->
+<!--         android:gravity="center"-->
+<!--         android:layout_marginTop="20dp">-->
+<!--         <ImageView-->
+<!--             android:layout_width="wrap_content"-->
+<!--             android:layout_height="wrap_content"-->
+<!--             android:src="@drawable/ic_facebook"/>-->
+<!--         <ImageView-->
+<!--             android:layout_width="wrap_content"-->
+<!--             android:layout_height="wrap_content"-->
+<!--             android:src="@drawable/ic_google_plus"-->
+<!--             android:layout_marginLeft="10dp"/>-->
+<!--      </LinearLayout>-->
+<!--        </LinearLayout>-->
+<!--      </ScrollView>-->
+<!--      <View-->
+<!--          android:layout_marginTop="20dp"-->
+<!--          android:layout_alignParentTop="true"-->
+<!--          android:layout_alignParentRight="true"-->
+<!--          android:layout_width="11dp"-->
+<!--          android:layout_height="match_parent"-->
+<!--          android:background="@drawable/ic_side_bg"/>-->
+<!--      <ImageView-->
+<!--          android:layout_alignParentBottom="true"-->
+<!--          android:layout_alignParentRight="true"-->
+<!--          android:layout_width="wrap_content"-->
+<!--          android:layout_height="wrap_content"-->
+<!--          android:src="@drawable/ic_add_img"-->
+<!--          android:layout_marginRight="11dp"-->
+<!--          android:layout_marginBottom="30dp"/>-->
+
+<!--</RelativeLayout>-->

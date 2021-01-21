@@ -11,6 +11,10 @@
 
     <color name="darkTextColor">#020000</color>
 
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#000</color>
+
+    <color name="themeColor">#11CFC5</color>
 
     <!--colors for light mode-->
     <color name="contentTextColor">#020000</color>
