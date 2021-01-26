@@ -14,12 +14,10 @@
             android:label="@string/title_activity_aila">
 
         </activity>
-        <activity android:name=".SignUpActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <activity android:name=".SignUpActivity">
 
         </activity>
-        <activity android:name=".LoginActivity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
