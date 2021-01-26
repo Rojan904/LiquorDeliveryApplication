@@ -121,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SignUp Here"
-            android:textColor="@color/teal_700"
+            android:textColor="#515BD4"
             android:textStyle="bold"
             android:textSize="16sp" />
 
@@ -192,6 +192,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/ic_side_bg"/>
     <ImageView
+        android:id="@+id/imgAdd"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_alignParentBottom="true"

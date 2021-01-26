@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/register_bk_color"
+    android:background="#515BD4"
     android:focusableInTouchMode="true"
     tools:context=".SignUpActivity">
     <androidx.constraintlayout.widget.Guideline
@@ -35,25 +35,34 @@
             android:padding="20dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
-            <RelativeLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:text="Get Started with Aila"
+                android:textSize="40sp"
+                android:layout_margin="20dp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:fontFamily="cursive"/>
 
-                <TextView
-                    style="@style/viewParent.headerText.NoMode"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:text="Aila, the pioneer liquor \ndelivery app of Nepal"
-                    android:textColor="@color/whiteTextColor" />
+<!--            <RelativeLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/img_aila" />
-            </RelativeLayout>
+<!--                <TextView-->
+<!--                    style="@style/viewParent.headerText.NoMode"-->
+<!--                    android:layout_alignParentLeft="true"-->
+<!--                    android:layout_centerVertical="true"-->
+<!--                    android:text="Aila, the pioneer liquor \ndelivery app of Nepal"-->
+<!--                    android:textColor="@color/whiteTextColor" />-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="100dp"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:layout_alignParentTop="true"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:src="@drawable/img_aila" />-->
+<!--            </RelativeLayout>-->
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
@@ -172,23 +181,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:src="@drawable/ic_google_plus" />
+
             </LinearLayout>
 
         </LinearLayout>
 
 
     </ScrollView>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="11dp"
-        android:layout_marginBottom="30dp"
-        android:adjustViewBounds="false"
-        android:src="@drawable/ic_back_img"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
 
+<!--    <ImageView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentLeft="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_marginRight="11dp"-->
+<!--        android:layout_marginBottom="30dp"-->
+<!--        android:src="@drawable/ic_back_img"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent" />-->
 
 
 
