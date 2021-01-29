@@ -3,6 +3,7 @@ package com.rozan.liquordeliveryapplication
 import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.EditText
@@ -65,26 +66,75 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun registerCustomer() {
-        val fname=etFname.text.toString()
-        val lname=etLname.text.toString()
-        val dob=etDOB.text.toString()
-        val username=etUsername.text.toString()
-        val email=etEmail.text.toString()
-        val password=etPassword.text.toString()
+        if (checkEmpty()) {
 
-        val customer= Customer(fname,lname,dob, username, email, password) //providing parameters to Customer
 
-        //Performing task in background thread so using CoroutineScope as it is light weight thread
-        CoroutineScope(Dispatchers.IO).launch {
-            CustomerDB
-                .getInstance(this@SignUpActivity)
-                .getCustomerDAO()
-                .registerCustomer(customer)
-            withContext(Main){
-                Toast.makeText(this@SignUpActivity, "Customer registration successfull!", Toast.LENGTH_SHORT).show()
+            val fname = etFname.text.toString()
+            val lname = etLname.text.toString()
+            val dob = etDOB.text.toString()
+            val username = etUsername.text.toString()
+            val email = etEmail.text.toString()
+            val password = etPassword.text.toString()
+
+            val customer = Customer(
+                fname,
+                lname,
+                dob,
+                username,
+                email,
+                password
+            ) //providing parameters to Customer
+
+            //Performing task in background thread so using CoroutineScope as it is light weight thread
+            CoroutineScope(Dispatchers.IO).launch {
+                CustomerDB
+                    .getInstance(this@SignUpActivity)
+                    .getCustomerDAO()
+                    .registerCustomer(customer)
+                withContext(Main) {
+                    Toast.makeText(
+                        this@SignUpActivity,
+                        "Customer registration successfull!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+            }
+        }
+
+    }
+    private fun checkEmpty():Boolean{
+    var flag=true
+
+        when{
+            TextUtils.isEmpty(etFname.text) -> {
+                etFname.error = "Enter your first name"
+                etFname.requestFocus()
+                flag = false
+            }
+            TextUtils.isEmpty(etLname.text) -> {
+                etLname.error = "Enter your last name"
+                etLname.requestFocus()
+                flag = false
             }
 
+            TextUtils.isEmpty(etUsername.text) -> {
+                etUsername.error = "Enter your username"
+                etUsername.requestFocus()
+                flag = false
+            }
+            TextUtils.isEmpty(etEmail.text)->{
+                etEmail.error="Enter valid email"
+                etEmail.requestFocus()
+                flag=false
+            }
+            TextUtils.isEmpty(etPassword.text) -> {
+                etPassword.error = "Enter your password"
+                etPassword.requestFocus()
+                flag = false
+            }
         }
+        return flag
 
     }
 }
