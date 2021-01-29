@@ -3,6 +3,7 @@ package com.rozan.liquordeliveryapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -37,22 +38,46 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        val username=etUsername.text.toString()
-        val password=etPassword.text.toString()
-        var customer: Customer?=null
-        CoroutineScope(Dispatchers.IO).launch {
-            customer=CustomerDB
+        if (checkEmpty()) {
+
+
+            val username = etUsername.text.toString()
+            val password = etPassword.text.toString()
+            var customer: Customer? = null
+            CoroutineScope(Dispatchers.IO).launch {
+                customer = CustomerDB
                     .getInstance(this@LoginActivity)
                     .getCustomerDAO()
-                    .checkCustomer(username,password)
-            if (customer==null){
-                withContext(Main){
-                    Toast.makeText(this@LoginActivity, "Invalid username or password", Toast.LENGTH_SHORT).show()
+                    .checkCustomer(username, password)
+                if (customer == null) {
+                    withContext(Main) {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            "Invalid username or password",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                } else {
+                    startActivity(Intent(this@LoginActivity, AilaActivity::class.java))
                 }
             }
-            else{
-                startActivity(Intent(this@LoginActivity,AilaActivity::class.java))
-            }
         }
+    }
+    private fun checkEmpty():Boolean{
+       var flag=true
+       when{
+           TextUtils.isEmpty(etUsername.text) -> {
+               etUsername.error = "Enter your username"
+               etUsername.requestFocus()
+               flag = false
+           }
+
+           TextUtils.isEmpty(etPassword.text) -> {
+               etPassword.error = "Enter your password"
+               etPassword.requestFocus()
+               flag = false
+           }
+       }
+        return flag
     }
 }
