@@ -5,11 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.widget.Button
-import android.widget.CalendarView
 import android.widget.EditText
 import android.widget.Toast
-import com.rozan.liquordeliveryapplication.db.CustomerDB
-import com.rozan.liquordeliveryapplication.entity.Customer
+import com.rozan.liquordeliveryapplication.db.AilaDB
+import com.rozan.liquordeliveryapplication.entity.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
@@ -42,7 +41,7 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         btnSignup.setOnClickListener {
-            registerCustomer()
+            registerUser()
         }
     }
 
@@ -65,36 +64,37 @@ class SignUpActivity : AppCompatActivity() {
         datePickerDialog.show()
     }
 
-    private fun registerCustomer() {
+    private fun registerUser() {
         if (checkEmpty()) {
 
 
             val fname = etFname.text.toString()
+
             val lname = etLname.text.toString()
             val dob = etDOB.text.toString()
             val username = etUsername.text.toString()
             val email = etEmail.text.toString()
             val password = etPassword.text.toString()
 
-            val customer = Customer(
+            val user = User(
                 fname,
                 lname,
                 dob,
                 username,
                 email,
                 password
-            ) //providing parameters to Customer
+            ) //providing parameters to User
 
             //Performing task in background thread so using CoroutineScope as it is light weight thread
             CoroutineScope(Dispatchers.IO).launch {
-                CustomerDB
+                AilaDB
                     .getInstance(this@SignUpActivity)
-                    .getCustomerDAO()
-                    .registerCustomer(customer)
+                    .getUserDAO()
+                    .registerUser(user)
                 withContext(Main) {
                     Toast.makeText(
                         this@SignUpActivity,
-                        "Customer registration successfull!",
+                        "User registration successfull!",
                         Toast.LENGTH_SHORT
                     ).show()
                 }

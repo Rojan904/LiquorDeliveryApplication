@@ -8,8 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import com.rozan.liquordeliveryapplication.db.CustomerDB
-import com.rozan.liquordeliveryapplication.entity.Customer
+import com.rozan.liquordeliveryapplication.db.AilaDB
+import com.rozan.liquordeliveryapplication.entity.User
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
@@ -43,13 +43,13 @@ class LoginActivity : AppCompatActivity() {
 
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
-            var customer: Customer? = null
+            var user: User? = null
             CoroutineScope(Dispatchers.IO).launch {
-                customer = CustomerDB
+                user = AilaDB
                     .getInstance(this@LoginActivity)
-                    .getCustomerDAO()
-                    .checkCustomer(username, password)
-                if (customer == null) {
+                    .getUserDAO()
+                    .checkUser(username, password)
+                if (user == null) {
                     withContext(Main) {
                         Toast.makeText(
                             this@LoginActivity,
