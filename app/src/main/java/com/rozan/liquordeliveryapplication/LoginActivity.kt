@@ -58,11 +58,27 @@ class LoginActivity : AppCompatActivity() {
                         ).show()
                     }
                 } else {
+                    saveSharedPref()
                     startActivity(Intent(this@LoginActivity, AilaActivity::class.java))
+
                 }
             }
         }
     }
+
+    private fun saveSharedPref() {
+        val username=etUsername.text.toString()
+        val password=etPassword.text.toString()
+        val sharedPref=getSharedPreferences("MyPref", MODE_PRIVATE)  //shared preference banako
+        val editor=sharedPref.edit()
+
+        editor.putString("username",username)
+        editor.putString("password",password)
+
+        editor.apply()
+
+    }
+
     private fun checkEmpty():Boolean{
        var flag=true
        when{
