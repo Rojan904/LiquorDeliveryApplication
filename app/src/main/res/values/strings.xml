@@ -5,4 +5,8 @@
     <string name="title_orders">Orders</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_account">Account</string>
+
+    <string name="facebook_app_id">868672540578225</string>
+    <string name="fb_login_protocol_scheme">fb868672540578225</string>
+
 </resources>

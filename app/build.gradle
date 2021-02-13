@@ -37,6 +37,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    repositories {
+        mavenCentral()
+    }
 }
 
 dependencies {
@@ -71,4 +74,5 @@ dependencies {
 
     //For progressbar
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
 }
