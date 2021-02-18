@@ -3,6 +3,7 @@ package com.rozan.liquordeliveryapplication
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.facebook.CallbackManager
@@ -11,13 +12,17 @@ import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
+import com.google.android.material.snackbar.Snackbar
+import com.rozan.liquordeliveryapplication.api.ServiceBuilder
 import com.rozan.liquordeliveryapplication.db.AilaDB
 import com.rozan.liquordeliveryapplication.entity.User
+import com.rozan.liquordeliveryapplication.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
 import java.util.*
 
 
@@ -70,25 +75,43 @@ class LoginActivity : AppCompatActivity() {
         if (checkEmpty()) {
             val username = etUsername.text.toString()
             val password = etPassword.text.toString()
-            var user: User? = null
             CoroutineScope(Dispatchers.IO).launch {
-                user = AilaDB
-                    .getInstance(this@LoginActivity)
-                    .getUserDAO()
-                    .checkUser(username, password)
-                if (user == null) {
-                    withContext(Main) {
+                try {
+                    val repository = UserRepository()
+                    val response = repository.checkUser(username, password)
+                    if (response.success == true) {
+                        ServiceBuilder.token="Bearer ${response.token}"
+
+                        startActivity(
+                            Intent(
+                                this@LoginActivity,
+                                AilaActivity::class.java
+                            )
+                        )
+                        finish()
+                    } else {
+                        withContext(Dispatchers.Main) {
+//                            val snack =
+//                                Snackbar.make(
+//                                    linearLayout,
+//                                    "Invalid credentials",
+//                                    Snackbar.LENGTH_LONG
+//                                )
+//                            snack.setAction("OK", View.OnClickListener {
+//                                snack.dismiss()
+//                            })
+//                            snack.show()
+                            Toast.makeText(this@LoginActivity, "Invalid", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } catch (ex: IOException) {
+                    withContext(Dispatchers.Main) {
                         Toast.makeText(
                             this@LoginActivity,
-                            "Invalid username or password",
+                            ex.toString(),
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                } else {
-
-                    saveSharedPref()
-                    startActivity(Intent(this@LoginActivity, AilaActivity::class.java))
-
                 }
             }
         }
