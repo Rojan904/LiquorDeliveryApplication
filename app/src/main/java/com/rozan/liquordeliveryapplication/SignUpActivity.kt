@@ -9,6 +9,8 @@ import android.widget.EditText
 import android.widget.Toast
 import com.rozan.liquordeliveryapplication.db.AilaDB
 import com.rozan.liquordeliveryapplication.entity.User
+import com.rozan.liquordeliveryapplication.entity.Users
+import com.rozan.liquordeliveryapplication.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
@@ -69,34 +71,44 @@ class SignUpActivity : AppCompatActivity() {
 
 
             val fname = etFname.text.toString()
-
             val lname = etLname.text.toString()
             val dob = etDOB.text.toString()
             val username = etUsername.text.toString()
             val email = etEmail.text.toString()
             val password = etPassword.text.toString()
 
-            val user = User(
-                fname,
-                lname,
-                dob,
-                username,
-                email,
-                password
+            val user = Users(
+                firstName= fname,
+                lastName = lname,
+                dob = dob,
+                username = username,
+                email = email,
+                password = password
             ) //providing parameters to User
 
             //Performing task in background thread so using CoroutineScope as it is light weight thread
-            CoroutineScope(Dispatchers.IO).launch {
-                AilaDB
-                    .getInstance(this@SignUpActivity)
-                    .getUserDAO()
-                    .registerUser(user)
-                withContext(Main) {
-                    Toast.makeText(
-                        this@SignUpActivity,
-                        "User registration successfull!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+            CoroutineScope(
+                    Dispatchers.IO).launch {
+                try {
+                    val userRepository = UserRepository()
+                    val response = userRepository.registerUser(user)
+                    if (response.success == true) {
+                        withContext(Main) {
+                            Toast.makeText(
+                                    this@SignUpActivity,
+                                    response.message,
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                } catch (ex: Exception) {
+                    withContext(Main) {
+                        Toast.makeText(
+                                this@SignUpActivity,
+                                "Error registering user",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
 
             }
