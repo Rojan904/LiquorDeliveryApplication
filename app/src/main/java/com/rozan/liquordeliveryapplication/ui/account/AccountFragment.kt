@@ -22,6 +22,7 @@ class AccountFragment : Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AccountViewModel::class.java)
         // TODO: Use the ViewModel
