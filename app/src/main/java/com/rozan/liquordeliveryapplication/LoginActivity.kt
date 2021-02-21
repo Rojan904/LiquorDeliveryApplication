@@ -1,11 +1,13 @@
 package com.rozan.liquordeliveryapplication
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -31,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var etPassword:EditText
     private lateinit var tvSignUp:TextView
     private lateinit var btnLogin: Button
-    private lateinit var btnFacebook: ImageView
+    private lateinit var constraintLayout:ConstraintLayout
     private lateinit var btnFb: LoginButton
     private val EMAIL = "email"
     val callbackManager = CallbackManager.Factory.create();
@@ -42,8 +44,8 @@ class LoginActivity : AppCompatActivity() {
         etPassword=findViewById(R.id.etPassword)
         tvSignUp=findViewById(R.id.tvSignUp)
         btnLogin=findViewById(R.id.btnLogin)
-        btnFacebook=findViewById(R.id.btnFacebook)
         btnFb=findViewById(R.id.btnfb)
+        constraintLayout=findViewById(R.id.constraintLayout)
         tvSignUp.setOnClickListener{
             startActivity(Intent(this, SignUpActivity::class.java))
         }
@@ -91,17 +93,19 @@ class LoginActivity : AppCompatActivity() {
                         finish()
                     } else {
                         withContext(Dispatchers.Main) {
-//                            val snack =
-//                                Snackbar.make(
-//                                    linearLayout,
-//                                    "Invalid credentials",
-//                                    Snackbar.LENGTH_LONG
-//                                )
-//                            snack.setAction("OK", View.OnClickListener {
-//                                snack.dismiss()
-//                            })
-//                            snack.show()
-                            Toast.makeText(this@LoginActivity, "Invalid", Toast.LENGTH_SHORT).show()
+                            val snack =
+                                Snackbar.make(
+                                    constraintLayout,
+                                    "Invalid username or password",
+                                    Snackbar.LENGTH_LONG
+                                )
+                            snack.setAction("OK", View.OnClickListener {
+                                snack.dismiss()
+                            })
+                            snack.setBackgroundTint(Color.BLACK)
+                            
+                            snack.show()
+
                         }
                     }
                 } catch (ex: IOException) {
