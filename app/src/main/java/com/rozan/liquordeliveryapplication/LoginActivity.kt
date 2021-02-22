@@ -91,6 +91,7 @@ class LoginActivity : AppCompatActivity() {
                             )
                         )
                         finish()
+                        saveSharedPref()
                     } else {
                         withContext(Dispatchers.Main) {
                             val snack =
@@ -102,7 +103,8 @@ class LoginActivity : AppCompatActivity() {
                             snack.setAction("OK", View.OnClickListener {
                                 snack.dismiss()
                             })
-                            snack.setBackgroundTint(Color.BLACK)
+                            snack.setActionTextColor(Color.WHITE)
+                            snack.setBackgroundTint(Color.parseColor("#515BD4"))
                             
                             snack.show()
 
