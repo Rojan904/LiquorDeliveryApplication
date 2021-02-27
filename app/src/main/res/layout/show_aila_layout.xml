@@ -23,6 +23,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:src="@drawable/khukuri"
+            android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +31,6 @@
             android:id="@+id/imgFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/image"
             android:backgroundTint="@color/white"
             android:src="@drawable/ic_baseline_favorite_border_24"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,7 +42,6 @@
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image"
             android:layout_marginLeft="5dp"
             android:text="Price"
             android:textColor="#B71C1C"
@@ -54,7 +53,6 @@
             android:id="@+id/ml"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/price"
             android:layout_marginTop="4dp"
             android:text="ml"
             android:layout_marginLeft="5dp"
@@ -65,7 +63,6 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/price"
             android:layout_marginTop="4dp"
             android:text="Name"
             android:layout_marginLeft="5dp"
@@ -74,11 +71,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ml" />
 
+        <TextView
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Type"
+            android:layout_marginLeft="5dp"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
+
         <ImageView
             android:id="@+id/imgCart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/image"
             android:backgroundTint="@color/white"
             android:src="@drawable/ic_baseline_shopping_cart_24"
             android:layout_marginRight="5dp"
