@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 
 
 data class Aila (
+    var _id:String?=null,
     var ailaImage:String?=null,
     var ailaPrice:Double?=null,
     var ailaMl:String?=null,

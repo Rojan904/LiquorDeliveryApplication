@@ -7,10 +7,11 @@ import android.widget.ProgressBar
 import com.github.ybq.android.spinkit.sprite.Sprite
 import com.github.ybq.android.spinkit.style.DoubleBounce
 import com.github.ybq.android.spinkit.style.Wave
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.rozan.liquordeliveryapplication.api.ServiceBuilder
+import com.rozan.liquordeliveryapplication.repository.UserRepository
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.Main
+import java.io.IOException
 
 class SplashScreenActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
@@ -39,13 +40,40 @@ class SplashScreenActivity : AppCompatActivity() {
     val sharedPref=getSharedPreferences("MyPref", MODE_PRIVATE)
     val username=sharedPref.getString("username","")
     val password=sharedPref.getString("password","")
-        if (username != null && !username.equals("")) {
-
-            startActivity(Intent(this@SplashScreenActivity,AilaActivity::class.java))
-    }
-        else{
-
-            startActivity(Intent(this@SplashScreenActivity,LoginActivity::class.java))
+//        if (username != null && !username.equals("")) {
+//
+//            startActivity(Intent(this@SplashScreenActivity,AilaActivity::class.java))
+//    }
+//        else{
+//
+//            startActivity(Intent(this@SplashScreenActivity,LoginActivity::class.java))
+//        }
+        CoroutineScope(Dispatchers.IO).launch {
+            if (username == null && password == null) {
+                withContext(Main) {
+                    startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
+                    finish()
+                }
+            }
+            else {
+                try {
+                    val repository = UserRepository()
+                    val response = repository.checkUser(username.toString(), password.toString())
+                    if (response.success == true) {
+                        ServiceBuilder.token = "Bearer ${response.token}"
+                        startActivity(Intent(this@SplashScreenActivity, AilaActivity::class.java))
+                        finish()
+                    }
+                }
+                catch (ex: IOException) {
+                    withContext(Main) {
+                        startActivity(Intent(this@SplashScreenActivity, LoginActivity::class.java))
+                        finish()
+                    }
+                }
+            }
         }
+
     }
+
 }

@@ -15,6 +15,11 @@ import com.rozan.liquordeliveryapplication.adapter.AilaAdapter
 import com.rozan.liquordeliveryapplication.adapter.AilaCategoryAdapter
 import com.rozan.liquordeliveryapplication.entity.Aila
 import com.rozan.liquordeliveryapplication.model.AilaCategory
+import com.rozan.liquordeliveryapplication.repository.AilaRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
@@ -42,8 +47,6 @@ class HomeFragment : Fragment() {
             categoryRecyclerView(root,context)
             ailaRecyclerView(root,context)
         })
-
-
         return root
     }
 
@@ -68,17 +71,32 @@ class HomeFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView2 = view.findViewById(R.id.recyclerView2)
         val adapter = AilaAdapter(ailaList,context)
-        recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        recyclerView.adapter = adapter
 
         recyclerView2.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView2.adapter = adapter
-        loadAila()
+        loadAila(context)
     }
-    private fun loadAila(){
-        ailaList.add(Aila(ailaPrice = 1550.0,ailaMl = "750",ailaName = "Khukuri rum"))
-        ailaList.add(Aila(ailaPrice = 1550.0,ailaMl = "750",ailaName = "Khukuri rum"))
-        ailaList.add(Aila(ailaPrice = 1550.0,ailaMl = "750",ailaName = "Khukuri rum"))
+    private fun loadAila(context: Context){
+
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val ailaRepository = AilaRepository()
+                val response = ailaRepository.getAllAila()
+
+                    // Put all the aila details in lstAila
+                    val lstAila = response.data
+                    withContext(Dispatchers.Main){
+                        recyclerView.adapter = AilaAdapter(lstAila!!,context)
+                        recyclerView.layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
+                    }
+
+            }catch(ex : Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(context,
+                            "Error : ${ex.toString()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
 
