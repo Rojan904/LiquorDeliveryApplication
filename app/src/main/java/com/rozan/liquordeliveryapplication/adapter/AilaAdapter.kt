@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.rozan.liquordeliveryapplication.R
 import com.rozan.liquordeliveryapplication.entity.Aila
 
@@ -21,6 +22,7 @@ class AilaAdapter (
         val ailaPrice:TextView
         val ailaMl:TextView
         val ailaName:TextView
+        val ailaType:TextView
         val imgFavorite:ImageView
         val imgCart:ImageView
 
@@ -29,6 +31,7 @@ class AilaAdapter (
             ailaPrice=view.findViewById(R.id.price)
             ailaMl=view.findViewById(R.id.ml)
             ailaName=view.findViewById(R.id.name)
+            ailaType=view.findViewById(R.id.type)
             imgFavorite=view.findViewById(R.id.imgFavorite)
             imgCart=view.findViewById(R.id.imgCart)
         }
@@ -45,6 +48,11 @@ class AilaAdapter (
         holder.ailaPrice.text=aila.ailaPrice.toString()
         holder.ailaMl.text=aila.ailaMl.toString()
         holder.ailaName.text=aila.ailaName.toString()
+        holder.ailaType.text=aila.ailaType.toString()
+
+        Glide.with(context)
+            .load(aila.ailaImage)
+            .into(holder.ailaImage)
 
     }
 
