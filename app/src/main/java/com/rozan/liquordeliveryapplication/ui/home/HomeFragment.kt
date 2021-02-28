@@ -18,6 +18,7 @@ import com.rozan.liquordeliveryapplication.model.AilaCategory
 
 class HomeFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerView2: RecyclerView
     private lateinit var categRecyclerView: RecyclerView
 
     private var ailaList= arrayListOf<Aila>()
@@ -57,13 +58,21 @@ class HomeFragment : Fragment() {
 
     private fun loadCateg() {
         ailaCategory.add((AilaCategory(categName = "Whisky",categImage = "https://cdn.shopify.com/s/files/1/0025/0399/9545/products/40020_1.jpg?v=1575660313")))
+        ailaCategory.add((AilaCategory(categName = "Rum",categImage = "https://cdn.shopify.com/s/files/1/0025/0399/9545/products/40020_1.jpg?v=1575660313")))
+        ailaCategory.add((AilaCategory(categName = "Vodka",categImage = "https://cdn.shopify.com/s/files/1/0025/0399/9545/products/40020_1.jpg?v=1575660313")))
+        ailaCategory.add((AilaCategory(categName = "Wine",categImage = "https://cdn.shopify.com/s/files/1/0025/0399/9545/products/40020_1.jpg?v=1575660313")))
+        ailaCategory.add((AilaCategory(categName = "Beer",categImage = "https://cdn.shopify.com/s/files/1/0025/0399/9545/products/40020_1.jpg?v=1575660313")))
     }
 
     private fun ailaRecyclerView(view: View,context: Context) {
         recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView2 = view.findViewById(R.id.recyclerView2)
         val adapter = AilaAdapter(ailaList,context)
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         recyclerView.adapter = adapter
+
+        recyclerView2.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        recyclerView2.adapter = adapter
         loadAila()
     }
     private fun loadAila(){
