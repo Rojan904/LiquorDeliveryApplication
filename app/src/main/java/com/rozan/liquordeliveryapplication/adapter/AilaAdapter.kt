@@ -13,7 +13,7 @@ import com.rozan.liquordeliveryapplication.R
 import com.rozan.liquordeliveryapplication.entity.Aila
 
 class AilaAdapter (
-        val lstAila:List<Aila>,
+        val lstAila:MutableList<Aila>,
         val context: Context
         ):RecyclerView.Adapter<AilaAdapter.AilaViewHolder>()
 {

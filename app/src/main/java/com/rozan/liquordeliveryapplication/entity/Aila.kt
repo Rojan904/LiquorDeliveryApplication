@@ -3,9 +3,9 @@ package com.rozan.liquordeliveryapplication.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-
+@Entity
 data class Aila (
-    var _id:String?=null,
+
     var ailaImage:String?=null,
     var ailaPrice:Double?=null,
     var ailaMl:String?=null,
@@ -13,5 +13,6 @@ data class Aila (
     var ailaType:String?=null,
 
         ){
-
+    @PrimaryKey
+    var ailaId:Int?=null
 }

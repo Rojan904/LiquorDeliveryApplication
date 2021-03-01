@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.rozan.liquordeliveryapplication.R
 import com.rozan.liquordeliveryapplication.adapter.AilaAdapter
 import com.rozan.liquordeliveryapplication.adapter.AilaCategoryAdapter
+import com.rozan.liquordeliveryapplication.db.AilaDB
 import com.rozan.liquordeliveryapplication.entity.Aila
 import com.rozan.liquordeliveryapplication.model.AilaCategory
 import com.rozan.liquordeliveryapplication.repository.AilaRepository
@@ -84,9 +85,12 @@ class HomeFragment : Fragment() {
                 val response = ailaRepository.getAllAila()
 
                     // Put all the aila details in lstAila
-                    val lstAila = response.data
+                    val lstAila = response.data!!
+                    AilaDB.getInstance(context).getAilaDAO().insertAila(lstAila)
+
+                    val showAila=AilaDB.getInstance(context).getAilaDAO().getAila()
                     withContext(Dispatchers.Main){
-                        recyclerView.adapter = AilaAdapter(lstAila!!,context)
+                        recyclerView.adapter = AilaAdapter(showAila,context)
                         recyclerView.layoutManager = LinearLayoutManager(context,RecyclerView.HORIZONTAL,false)
                     }
 
