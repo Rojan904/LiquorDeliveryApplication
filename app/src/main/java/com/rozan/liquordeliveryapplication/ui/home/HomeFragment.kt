@@ -83,15 +83,10 @@ class HomeFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val ailaRepository = AilaRepository()
-                val response = ailaRepository.getAllAila()
+                val response = ailaRepository.getAllAila(context)
 
-                // Put all the aila details in lstAila
-                val lstAila = response.data!!
-                AilaDB.getInstance(context).getAilaDAO().insertAila(lstAila)
-
-                val showAila = AilaDB.getInstance(context).getAilaDAO().getAila()
                 withContext(Dispatchers.Main) {
-                    recyclerView.adapter = AilaAdapter(showAila, context)
+                    recyclerView.adapter = AilaAdapter(response, context)
                     recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
