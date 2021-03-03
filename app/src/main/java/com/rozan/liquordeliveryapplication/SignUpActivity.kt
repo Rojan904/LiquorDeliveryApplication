@@ -1,6 +1,7 @@
 package com.rozan.liquordeliveryapplication
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -99,6 +100,7 @@ class SignUpActivity : AppCompatActivity() {
                                     response.message,
                                     Toast.LENGTH_SHORT
                             ).show()
+                            startActivity(Intent(this@SignUpActivity,LoginActivity::class.java))
                         }
                     }
                 } catch (ex: Exception) {
@@ -112,6 +114,12 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
             }
+            etFname.text.clear()
+            etLname.text.clear()
+            etDOB.text.clear()
+            etUsername.text.clear()
+            etEmail.text.clear()
+            etPassword.text.clear()
         }
 
     }
