@@ -1,14 +1,15 @@
 package com.rozan.liquordeliveryapplication.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.rozan.liquordeliveryapplication.AilaDetailsActivity
 import com.rozan.liquordeliveryapplication.R
 import com.rozan.liquordeliveryapplication.entity.Aila
 
@@ -53,6 +54,13 @@ class AilaAdapter (
         Glide.with(context)
             .load(aila.ailaImage)
             .into(holder.ailaImage)
+
+        holder.itemView.setOnClickListener {
+            val intent= Intent(context,AilaDetailsActivity::class.java)
+            intent.putExtra("aila",aila)
+            context.startActivity(intent)
+        }
+
 
     }
 
