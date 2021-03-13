@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rozan.liquordeliveryapplication.AilaDetailsActivity
 import com.rozan.liquordeliveryapplication.R
+import com.rozan.liquordeliveryapplication.api.ServiceBuilder
 import com.rozan.liquordeliveryapplication.entity.Aila
 
 class AilaAdapter (
@@ -51,9 +52,13 @@ class AilaAdapter (
         holder.ailaName.text=aila.ailaName.toString()
         holder.ailaType.text=aila.ailaType.toString()
 
+        val imagePath = ServiceBuilder.loadImagePath() + aila.ailaImage!!.split("\\")[1]
         Glide.with(context)
-            .load(aila.ailaImage)
-            .into(holder.ailaImage)
+                .load(imagePath)
+                .into(holder.ailaImage)
+//        Glide.with(context)
+//            .load(aila.ailaImage)
+//            .into(holder.ailaImage)
 
         holder.itemView.setOnClickListener {
             val intent= Intent(context,AilaDetailsActivity::class.java)

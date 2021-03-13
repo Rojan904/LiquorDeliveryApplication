@@ -19,5 +19,7 @@ object ServiceBuilder {
     fun <T> buildService(serviceType: Class<T>): T {
         return retrofit.create(serviceType)
     }
-
+    fun loadImagePath(): String {
+        return BASE_URL
+    }
 }
