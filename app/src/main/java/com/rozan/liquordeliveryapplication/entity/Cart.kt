@@ -7,7 +7,8 @@ data class Cart (
         var ailaPrice:Double?=null,
         var ailaMl:String?=null,
         var ailaName:String?=null,
-        var ailaQty:Int?=null
+        var ailaQty:Int?=null,
+        var userId:String?=null
         ){
 
 }

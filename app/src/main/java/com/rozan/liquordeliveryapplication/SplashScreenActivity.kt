@@ -28,11 +28,11 @@ class SplashScreenActivity : AppCompatActivity() {
                 progressBar = findViewById(R.id.spin_kit)
                 val doubleBounce: Sprite = DoubleBounce()
                 progressBar.indeterminateDrawable = doubleBounce
-//                finish()
+
 
             })
             checkLogin()
-            finish()
+//            finish()
         }
     }
 
