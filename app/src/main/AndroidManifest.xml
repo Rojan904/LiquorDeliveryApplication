@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LiquorDeliveryApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AilaDetailsActivity"></activity>
+        <activity android:name=".CartActivity"></activity>
+        <activity android:name=".AilaDetailsActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -46,8 +47,7 @@
             android:name=".AilaActivity"
             android:label="@string/title_activity_aila" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity">
-        </activity>
+        <activity android:name=".LoginActivity"></activity>
         <activity android:name=".MainActivity" />
     </application>
 

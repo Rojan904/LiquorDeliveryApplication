@@ -1,5 +1,6 @@
 package com.rozan.liquordeliveryapplication
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
@@ -47,7 +48,7 @@ class AilaActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.cart -> {
-                Toast.makeText(this, "Cart Clicked", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this,CartActivity::class.java))
             }
         }
         return super.onOptionsItemSelected(item)
