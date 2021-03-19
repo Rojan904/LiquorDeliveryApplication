@@ -15,4 +15,10 @@ class CartRepository:APIRequest() {
             cartAPI.addToCart(ServiceBuilder.token!!,cart)
         }
     }
+
+    suspend fun getCart():CartResponse{
+        return apiRequest {
+            cartAPI.getCart(ServiceBuilder.token!!)
+        }
+    }
 }

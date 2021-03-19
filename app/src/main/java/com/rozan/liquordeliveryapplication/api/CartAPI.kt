@@ -4,6 +4,7 @@ import com.rozan.liquordeliveryapplication.entity.Cart
 import com.rozan.liquordeliveryapplication.response.CartResponse
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
@@ -13,5 +14,10 @@ interface CartAPI {
     suspend fun addToCart(
             @Header("Authorization") token:String,
             @Body cart: Cart
+    ):Response<CartResponse>
+
+    @GET("cart/all")
+    suspend fun getCart(
+            @Header("Authorization") token: String
     ):Response<CartResponse>
 }

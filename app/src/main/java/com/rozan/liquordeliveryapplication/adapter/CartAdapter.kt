@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.rozan.liquordeliveryapplication.R
 import com.rozan.liquordeliveryapplication.api.ServiceBuilder
 import com.rozan.liquordeliveryapplication.entity.Cart
@@ -50,6 +52,8 @@ class CartAdapter(
         val imagePath = ServiceBuilder.loadImagePath() + cart.ailaImage!!.split("\\")[1]
         Glide.with(context)
                 .load(imagePath)
+//                .apply(RequestOptions.skipMemoryCacheOf(true))
+//                .apply(RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.NONE))
                 .into(holder.ailaImage)
     }
 
