@@ -68,7 +68,7 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
             tvDescrip.text="mnajasdhlasdjlkasjdlkasjdlksjdklasjdlkasjdlksajdklasjdsakljdddddddskdjaslkdjlsakjdskajdlska" +
                     "mnajasdhlasdjlkasjdlkasjdlksjdklasjdlkasjdlksajdklasjdsakljdddddddskdjaslkdjlsakjdskajdlskdjhlskadjlksadjlakjdaklsjdkasjdklsajdklasjdklsadjklsjdklsajdakskldjaskldjaskldj"
 
-            Glide.with(this).load(intent.ailaImage!!.toString()).into(imgAila)
+            Glide.with(this).load(intent.ailaImage).fitCenter().into(imgAila)
 
         }
         btnAdd.setOnClickListener(this)
@@ -93,7 +93,7 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
                val ailaQty=ailaQty.text.toString().toInt()
 
-                val cart=Cart(ailaPrice = ailaPrice,ailaMl = ailaMl,ailaName = ailaName,ailaQty = ailaQty)
+                val cart=Cart(ailaImage=ailaImage,ailaPrice = ailaPrice,ailaMl = ailaMl,ailaName = ailaName,ailaQty = ailaQty)
 
                 CoroutineScope(Dispatchers.IO).launch {
                     try {

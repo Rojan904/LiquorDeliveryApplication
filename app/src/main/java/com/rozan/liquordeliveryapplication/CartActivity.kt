@@ -36,11 +36,10 @@ class CartActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             try{
                 val cartRepository=CartRepository()
-                val response=cartRepository.getCart()
+                val response=cartRepository.getCart(this@CartActivity)
 
-                val lstCart=response.data!!
                 withContext(Main){
-                    cartRecyclerView.adapter=CartAdapter(lstCart,this@CartActivity)
+                    cartRecyclerView.adapter=CartAdapter(response,this@CartActivity)
                     cartRecyclerView.layoutManager=LinearLayoutManager(this@CartActivity)
                 }
             }

@@ -1,6 +1,9 @@
 package com.rozan.liquordeliveryapplication.entity
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
+@Entity
 data class Cart (
         var _id:String?=null,
         var ailaImage:String?=null,
@@ -10,5 +13,7 @@ data class Cart (
         var ailaQty:Int?=null,
         var userId:String?=null
         ){
+        @PrimaryKey
+        var cartId:Int?=null
 
 }
