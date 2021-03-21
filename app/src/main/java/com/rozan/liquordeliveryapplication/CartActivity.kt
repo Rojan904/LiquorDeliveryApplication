@@ -2,6 +2,9 @@ package com.rozan.liquordeliveryapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,23 +19,19 @@ import kotlinx.coroutines.withContext
 import java.lang.Exception
 
 class CartActivity : AppCompatActivity() {
+
+
     private lateinit var cartRecyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cart)
 
-        cartRecyclerView()
-    }
-
-    private fun cartRecyclerView() {
-        cartRecyclerView=findViewById(R.id.cartRecyclerView)
-
-
         loadCart()
     }
 
-    private fun loadCart() {
 
+    private fun loadCart() {
+        cartRecyclerView=findViewById(R.id.cartRecyclerView)
         CoroutineScope(Dispatchers.IO).launch {
             try{
                 val cartRepository=CartRepository()
@@ -51,4 +50,6 @@ class CartActivity : AppCompatActivity() {
             }
         }
     }
-}
+
+
+    }

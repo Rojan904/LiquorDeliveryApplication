@@ -57,7 +57,6 @@
         android:id="@+id/btnContinue"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"
         android:background="@color/register_bk_color"
         android:backgroundTint="#C51162"

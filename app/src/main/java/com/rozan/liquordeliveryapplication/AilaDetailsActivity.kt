@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.BinderThread
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.rozan.liquordeliveryapplication.entity.Aila
 import com.rozan.liquordeliveryapplication.entity.Cart
@@ -82,11 +83,18 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btnAdd->{
                 counter++
                 ailaQty.text=counter.toString()
+                if(counter>1){
+                    btnSub.isClickable=true
+                }
 
             }
             R.id.btnSub->{
                 counter--
                 ailaQty.text=counter.toString()
+                if(counter<=1){
+                    btnSub.isClickable=false
+                }
+
 
             }
             R.id.btnAddCart -> {
