@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.rozan.liquordeliveryapplication.R
@@ -23,8 +24,11 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomeFragment : Fragment() {
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var recyclerView2: RecyclerView
+    private lateinit var picksRV: RecyclerView
+    private lateinit var recommendedRV: RecyclerView
+    private lateinit var whiskyRV: RecyclerView
+    private lateinit var vodkaRV: RecyclerView
+    private lateinit var wineRV: RecyclerView
     private lateinit var categRecyclerView: RecyclerView
 
     private var ailaList = arrayListOf<Aila>()
@@ -69,16 +73,13 @@ class HomeFragment : Fragment() {
     }
 
     private fun ailaRecyclerView(view: View, context: Context) {
-        recyclerView = view.findViewById(R.id.recyclerView)
-        recyclerView2 = view.findViewById(R.id.recyclerView2)
-        val adapter = AilaAdapter(ailaList, context)
-
-        recyclerView2.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        recyclerView2.adapter = adapter
-        loadAila(context)
+        picksRV = view.findViewById(R.id.picksRV)
+        recommendedRV = view.findViewById(R.id.recommendedRV)
+        loadPicks(context)
+//        loadRec(context)
     }
 
-    private fun loadAila(context: Context) {
+    private fun loadPicks(context: Context) {
 
         CoroutineScope(Dispatchers.IO).launch {
             try {
@@ -86,8 +87,8 @@ class HomeFragment : Fragment() {
                 val response = ailaRepository.getAllAila(context)
 
                 withContext(Dispatchers.Main) {
-                    recyclerView.adapter = AilaAdapter(response, context)
-                    recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                    picksRV.adapter = AilaAdapter(response, context)
+                    picksRV.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
 
             } catch (ex: Exception) {
@@ -98,6 +99,10 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
+
+
+
 
 
 }

@@ -91,6 +91,7 @@
                     android:layout_marginLeft="10dp"
                     android:textSize="20sp"
                     android:textColor="@color/black"/>
+
                 <TextView
                     android:id="@+id/ailaPrice"
                     app:layout_constraintTop_toBottomOf="@id/ailaMl"
@@ -139,6 +140,31 @@
 
 
         </androidx.cardview.widget.CardView>
+<!--&lt;!&ndash;      <LinearLayout&ndash;&gt;-->
+<!--&lt;!&ndash;          android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;          android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;          android:orientation="horizontal">&ndash;&gt;-->
+
+<!--&lt;!&ndash;          <Button&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_margin="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_weight="1"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:text="180ml"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_height="wrap_content"/>&ndash;&gt;-->
+<!--&lt;!&ndash;          <Button&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_margin="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_weight="1"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:text="180ml"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_height="wrap_content"/>&ndash;&gt;-->
+<!--&lt;!&ndash;          <Button&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_margin="10dp"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_width="0dp"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_weight="1"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:text="180ml"&ndash;&gt;-->
+<!--&lt;!&ndash;              android:layout_height="wrap_content"/>&ndash;&gt;-->
+
+<!--      </LinearLayout>-->
 
      <LinearLayout
         android:layout_width="match_parent"
@@ -185,7 +211,6 @@
                 android:textColor="@color/white"
                 />
         </LinearLayout>
-
 
         <Button
             android:id="@+id/btnAddCart"

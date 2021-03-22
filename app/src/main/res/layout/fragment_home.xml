@@ -18,32 +18,57 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+     <TextView
+        style="@style/textview"
         android:text="Top Picks"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:layout_margin="10dp"/>
+        />
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/picksRV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+   />
+        <TextView
+         style="@style/textview"
+         android:text="Recommended"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recommendedRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            />
+        <TextView
+        style="@style/textview"
+        android:text="Featured Whisky"
+       />
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/whiskyRV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         />
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Top Picks"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        android:layout_margin="10dp"/>
+        style="@style/textview"
+        android:text="Featured Vodka" />
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+       android:id="@+id/vodkaRV"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginRight="10dp"
         />
+        <TextView
+            style="@style/textview"
+            android:text="Featured Wine" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/wineRV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            />
+
+
+
     </LinearLayout>
 
 </ScrollView>

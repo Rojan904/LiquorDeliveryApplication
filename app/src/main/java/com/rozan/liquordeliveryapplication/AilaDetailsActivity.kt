@@ -3,10 +3,7 @@ package com.rozan.liquordeliveryapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.annotation.BinderThread
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
@@ -31,6 +28,7 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var btnAdd: Button
     private lateinit var ailaQty: TextView
     private lateinit var btnAddToCart: Button
+
     var counter=1
     private var ailaImage:String?=null
     private  var ailaName:String?=null
@@ -38,6 +36,7 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
     private var ailaMl:String?=null
     private var ailaPrice:Double?=0.0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +54,7 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
         ailaQty=findViewById(R.id.ailaQty)
         btnAddToCart=findViewById(R.id.btnAddCart)
 
+
         val intent=intent.getParcelableExtra<Aila>("aila")
         if (intent!=null){
              ailaName=intent.ailaName
@@ -71,10 +71,12 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
             Glide.with(this).load(intent.ailaImage).fitCenter().into(imgAila)
 
+
         }
         btnAdd.setOnClickListener(this)
         btnSub.setOnClickListener(this)
         btnAddToCart.setOnClickListener(this)
+
 
     }
 
