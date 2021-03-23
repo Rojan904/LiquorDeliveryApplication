@@ -1,6 +1,7 @@
 package com.rozan.liquordeliveryapplication.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.media.Image
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.rozan.liquordeliveryapplication.AilaCategoryActivity
 import com.rozan.liquordeliveryapplication.R
 import com.rozan.liquordeliveryapplication.model.AilaCategory
 
@@ -40,7 +42,9 @@ class AilaCategoryAdapter(
                 .load(category.categImage)
                 .into(holder.imgCateg)
 
-        holder.imgCateg.setOnClickListener {
+        holder.itemView.setOnClickListener {
+
+            context.startActivity(Intent(context,AilaCategoryActivity::class.java))
 
         }
     }

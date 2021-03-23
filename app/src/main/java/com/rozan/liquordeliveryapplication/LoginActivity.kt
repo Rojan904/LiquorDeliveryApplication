@@ -29,27 +29,29 @@ import java.util.*
 
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var etUsername:EditText
-    private lateinit var etPassword:EditText
-    private lateinit var tvSignUp:TextView
+    private lateinit var etUsername: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var tvSignUp: TextView
     private lateinit var btnLogin: Button
-    private lateinit var constraintLayout:ConstraintLayout
+    private lateinit var checkme: CheckBox
+    private lateinit var constraintLayout: ConstraintLayout
     private lateinit var btnFb: LoginButton
     private val EMAIL = "email"
     val callbackManager = CallbackManager.Factory.create();
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        etUsername=findViewById(R.id.etUsername)
-        etPassword=findViewById(R.id.etPassword)
-        tvSignUp=findViewById(R.id.tvSignUp)
-        btnLogin=findViewById(R.id.btnLogin)
-        btnFb=findViewById(R.id.btnfb)
-        constraintLayout=findViewById(R.id.constraintLayout)
-        tvSignUp.setOnClickListener{
+        etUsername = findViewById(R.id.etUsername)
+        etPassword = findViewById(R.id.etPassword)
+        tvSignUp = findViewById(R.id.tvSignUp)
+        btnLogin = findViewById(R.id.btnLogin)
+        checkme = findViewById(R.id.checkme)
+        btnFb = findViewById(R.id.btnfb)
+        constraintLayout = findViewById(R.id.constraintLayout)
+        tvSignUp.setOnClickListener {
             startActivity(Intent(this, SignUpActivity::class.java))
         }
-        btnLogin.setOnClickListener{
+        btnLogin.setOnClickListener {
             login()
         }
 
@@ -69,10 +71,12 @@ class LoginActivity : AppCompatActivity() {
         })
 
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         callbackManager?.onActivityResult(requestCode, resultCode, data)
     }
+
     private fun login() {
         if (checkEmpty()) {
             val username = etUsername.text.toString()
@@ -82,30 +86,42 @@ class LoginActivity : AppCompatActivity() {
                     val repository = UserRepository()
                     val response = repository.checkUser(username, password)
                     if (response.success == true) {
-                        ServiceBuilder.token="Bearer ${response.token}"
+                        ServiceBuilder.token = "Bearer ${response.token}"
 
-                        startActivity(
-                            Intent(
-                                this@LoginActivity,
-                                AilaActivity::class.java
+                        if (checkme.isChecked) {
+                            saveSharedPref()
+                            startActivity(
+                                    Intent(
+                                            this@LoginActivity,
+                                            AilaActivity::class.java
+                                    )
                             )
-                        )
-                        finish()
-                        saveSharedPref()
+                            finish()
+                        } else {
+                            startActivity(
+                                    Intent(
+                                            this@LoginActivity,
+                                            AilaActivity::class.java
+                                    )
+                            )
+                            finish()
+                        }
+
+
                     } else {
                         withContext(Dispatchers.Main) {
                             val snack =
-                                Snackbar.make(
-                                    constraintLayout,
-                                    "Invalid username or password",
-                                    Snackbar.LENGTH_LONG
-                                )
+                                    Snackbar.make(
+                                            constraintLayout,
+                                            "Invalid username or password",
+                                            Snackbar.LENGTH_LONG
+                                    )
                             snack.setAction("OK", View.OnClickListener {
                                 snack.dismiss()
                             })
                             snack.setActionTextColor(Color.WHITE)
                             snack.setBackgroundTint(Color.parseColor("#515BD4"))
-                            
+
                             snack.show()
 
                         }
@@ -113,15 +129,16 @@ class LoginActivity : AppCompatActivity() {
                 } catch (ex: IOException) {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(
-                            this@LoginActivity,
-                            ex.toString(),
-                            Toast.LENGTH_SHORT
+                                this@LoginActivity,
+                                ex.toString(),
+                                Toast.LENGTH_SHORT
                         ).show()
                     }
                 }
             }
         }
     }
+
     private fun fbLogin() {
 
 
@@ -129,10 +146,10 @@ class LoginActivity : AppCompatActivity() {
 
 
     private fun saveSharedPref() {
-        val username=etUsername.text.toString()
-        val password=etPassword.text.toString()
-        val sharedPref=getSharedPreferences("MyPref", MODE_PRIVATE)  //shared preference banako
-        val editor=sharedPref.edit()
+        val username = etUsername.text.toString()
+        val password = etPassword.text.toString()
+        val sharedPref = getSharedPreferences("MyPref", MODE_PRIVATE)  //shared preference banako
+        val editor = sharedPref.edit()
 
         editor.putString("username", username)
         editor.putString("password", password)
@@ -141,21 +158,21 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun checkEmpty():Boolean{
-       var flag=true
-       when{
-           TextUtils.isEmpty(etUsername.text) -> {
-               etUsername.error = "Enter your username"
-               etUsername.requestFocus()
-               flag = false
-           }
+    private fun checkEmpty(): Boolean {
+        var flag = true
+        when {
+            TextUtils.isEmpty(etUsername.text) -> {
+                etUsername.error = "Enter your username"
+                etUsername.requestFocus()
+                flag = false
+            }
 
-           TextUtils.isEmpty(etPassword.text) -> {
-               etPassword.error = "Enter your password"
-               etPassword.requestFocus()
-               flag = false
-           }
-       }
+            TextUtils.isEmpty(etPassword.text) -> {
+                etPassword.error = "Enter your password"
+                etPassword.requestFocus()
+                flag = false
+            }
+        }
         return flag
     }
 }
