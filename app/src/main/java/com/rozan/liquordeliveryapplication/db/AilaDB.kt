@@ -6,20 +6,23 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.rozan.liquordeliveryapplication.dao.AilaDAO
 import com.rozan.liquordeliveryapplication.dao.CartDAO
+import com.rozan.liquordeliveryapplication.dao.FavoritesDAO
 import com.rozan.liquordeliveryapplication.dao.UserDAO
 import com.rozan.liquordeliveryapplication.entity.Aila
 import com.rozan.liquordeliveryapplication.entity.Cart
+import com.rozan.liquordeliveryapplication.entity.Favorites
 import com.rozan.liquordeliveryapplication.entity.User
 
 @Database(
-        entities =[(User::class),(Aila::class),(Cart::class)],
-        version = 2,
+        entities =[(User::class),(Aila::class),(Cart::class),(Favorites::class)],
+        version = 3,
         exportSchema = false
 )
 abstract class AilaDB:RoomDatabase() {
     abstract fun getUserDAO():UserDAO  //instance of UserDAO interface to access the function
     abstract fun getAilaDAO():AilaDAO
     abstract fun getCartDAO():CartDAO
+    abstract fun getFavoritesDAO():FavoritesDAO
     companion object{
         @Volatile
         private var instance:AilaDB?=null

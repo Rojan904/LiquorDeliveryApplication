@@ -7,6 +7,7 @@ import android.widget.*
 import androidx.annotation.BinderThread
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
+import com.rozan.liquordeliveryapplication.api.ServiceBuilder
 import com.rozan.liquordeliveryapplication.entity.Aila
 import com.rozan.liquordeliveryapplication.entity.Cart
 import com.rozan.liquordeliveryapplication.repository.CartRepository
@@ -66,10 +67,12 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
             tvType.text=ailaType
             tvMl.text=ailaMl.toString()
             tvPrice.text=ailaPrice.toString()
-            tvDescrip.text="mnajasdhlasdjlkasjdlkasjdlksjdklasjdlkasjdlksajdklasjdsakljdddddddskdjaslkdjlsakjdskajdlska" +
-                    "mnajasdhlasdjlkasjdlkasjdlksjdklasjdlkasjdlksajdklasjdsakljdddddddskdjaslkdjlsakjdskajdlskdjhlskadjlksadjlakjdaklsjdkasjdklsajdklasjdklsadjklsjdklsajdakskldjaskldjaskldj"
 
-            Glide.with(this).load(intent.ailaImage).fitCenter().into(imgAila)
+            val imagePath = ServiceBuilder.loadImagePath() + intent.ailaImage!!.split("\\")[1]
+            Glide.with(this)
+                    .load(imagePath)
+                    .into(imgAila)
+
 
 
         }
