@@ -14,9 +14,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.rozan.liquordeliveryapplication.R
 import com.rozan.liquordeliveryapplication.api.ServiceBuilder
 import com.rozan.liquordeliveryapplication.entity.Cart
+import com.rozan.liquordeliveryapplication.entity.Carts
 
 class CartAdapter(
-        val lstcart:MutableList<Cart>,
+        val lstcart:MutableList<Carts>,
         val context: Context
 ):RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     class CartViewHolder(view: View):RecyclerView.ViewHolder(view){
@@ -49,12 +50,12 @@ class CartAdapter(
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         val cart=lstcart[position]
-        holder.ailaPrice.text=cart.ailaPrice.toString()
-        holder.ailaMl.text=cart.ailaMl
-        holder.ailaName.text=cart.ailaName
+        holder.ailaPrice.text=cart.ailaId?.ailaPrice.toString()
+        holder.ailaMl.text=cart.ailaId?.ailaMl
+        holder.ailaName.text=cart.ailaId?.ailaName
         holder.ailaQty.text=cart.ailaQty.toString()
 
-        val imagePath = ServiceBuilder.loadImagePath() + cart.ailaImage!!.split("\\")[1]
+        val imagePath = ServiceBuilder.loadImagePath() + cart.ailaId?.ailaImage!!.split("\\")[1]
         Glide.with(context)
                 .load(imagePath)
 //                .apply(RequestOptions.skipMemoryCacheOf(true))

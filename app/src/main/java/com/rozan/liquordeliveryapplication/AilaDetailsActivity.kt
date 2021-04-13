@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.rozan.liquordeliveryapplication.api.ServiceBuilder
 import com.rozan.liquordeliveryapplication.entity.Aila
 import com.rozan.liquordeliveryapplication.entity.Cart
+import com.rozan.liquordeliveryapplication.entity.Carts
 import com.rozan.liquordeliveryapplication.repository.CartRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -108,7 +109,7 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
                val ailaQty=ailaQty.text.toString().toInt()
                 val userId = ServiceBuilder.userId!!
-                val cart=Cart(ailaPrice = ailaPrice,ailaQty = ailaQty,userId = userId)
+                val cart= Carts(ailaQty = ailaQty,userId = userId)
 
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
