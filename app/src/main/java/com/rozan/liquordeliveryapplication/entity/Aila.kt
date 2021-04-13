@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Aila (
-
+    var _id:String?=null,
     var ailaImage:String?=null,
     var ailaPrice:Double?=null,
     var ailaMl:String?=null,
@@ -20,6 +20,7 @@ data class Aila (
 
     constructor(parcel: Parcel) : this(
             parcel.readString(),
+            parcel.readString(),
             parcel.readValue(Double::class.java.classLoader) as? Double,
             parcel.readString(),
             parcel.readString(),
@@ -28,6 +29,7 @@ data class Aila (
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(_id)
         parcel.writeString(ailaImage)
         parcel.writeValue(ailaPrice)
         parcel.writeString(ailaMl)

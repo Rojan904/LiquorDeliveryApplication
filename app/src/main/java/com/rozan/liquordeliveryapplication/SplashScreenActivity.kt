@@ -40,14 +40,14 @@ class SplashScreenActivity : AppCompatActivity() {
     val sharedPref=getSharedPreferences("MyPref", MODE_PRIVATE)
     val username=sharedPref.getString("username","")
     val password=sharedPref.getString("password","")
-//        if (username != null && !username.equals("")) {
-//
-//            startActivity(Intent(this@SplashScreenActivity,AilaActivity::class.java))
-//    }
-//        else{
-//
-//            startActivity(Intent(this@SplashScreenActivity,LoginActivity::class.java))
-//        }
+        if (username != null && !username.equals("")) {
+
+            startActivity(Intent(this@SplashScreenActivity,AilaActivity::class.java))
+    }
+        else{
+
+            startActivity(Intent(this@SplashScreenActivity,LoginActivity::class.java))
+        }
         CoroutineScope(Dispatchers.IO).launch {
             if (username == null && password == null) {
                 withContext(Main) {
@@ -61,6 +61,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     val response = repository.checkUser(username.toString(), password.toString())
                     if (response.success == true) {
                         ServiceBuilder.token = "Bearer ${response.token}"
+                        ServiceBuilder.userId="${response.userId}"
                         startActivity(Intent(this@SplashScreenActivity, AilaActivity::class.java))
                         finish()
                     }

@@ -87,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
                     val response = repository.checkUser(username, password)
                     if (response.success == true) {
                         ServiceBuilder.token = "Bearer ${response.token}"
-
+                        ServiceBuilder.userId="${response.userId}"
                         if (checkme.isChecked) {
                             saveSharedPref()
                             startActivity(

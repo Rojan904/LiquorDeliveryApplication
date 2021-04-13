@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Cart (
-        var _id:String?=null,
+        var ailaId:String?=null,
         var ailaImage:String?=null,
         var ailaPrice:Double?=null,
         var ailaMl:String?=null,

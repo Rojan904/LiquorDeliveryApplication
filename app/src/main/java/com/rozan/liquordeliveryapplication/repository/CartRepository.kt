@@ -12,9 +12,9 @@ import com.rozan.liquordeliveryapplication.response.CartResponse
 class CartRepository:APIRequest() {
     val cartAPI= ServiceBuilder.buildService(CartAPI::class.java)
 
-    suspend fun addToCart(cart:Cart):CartResponse{
+    suspend fun addToCart(id:String,cart:Cart):CartResponse{
         return apiRequest {
-            cartAPI.addToCart(ServiceBuilder.token!!,cart)
+            cartAPI.addToCart(ServiceBuilder.token!!,id,cart)
         }
     }
 

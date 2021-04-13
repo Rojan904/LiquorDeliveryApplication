@@ -37,6 +37,7 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
     private var ailaMl:String?=null
     private var ailaPrice:Double?=0.0
+    private var ailaid:String?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,6 +59,7 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
         val intent=intent.getParcelableExtra<Aila>("aila")
         if (intent!=null){
+            ailaid=intent._id
              ailaName=intent.ailaName
              ailaType=intent.ailaType
              ailaMl=intent.ailaMl
@@ -105,13 +107,13 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
             R.id.btnAddCart -> {
 
                val ailaQty=ailaQty.text.toString().toInt()
-
-                val cart=Cart(ailaImage=ailaImage,ailaPrice = ailaPrice,ailaMl = ailaMl,ailaName = ailaName,ailaQty = ailaQty)
+                val userId = ServiceBuilder.userId!!
+                val cart=Cart(ailaPrice = ailaPrice,ailaQty = ailaQty,userId = userId)
 
                 CoroutineScope(Dispatchers.IO).launch {
                     try {
                         val cartRepository= CartRepository()
-                        val response=cartRepository.addToCart(cart)
+                        val response=cartRepository.addToCart(ailaid!!,cart)
                         if (response.success==true){
 
                             withContext(Dispatchers.Main){
