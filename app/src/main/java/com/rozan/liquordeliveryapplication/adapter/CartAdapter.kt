@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -15,6 +16,12 @@ import com.rozan.liquordeliveryapplication.R
 import com.rozan.liquordeliveryapplication.api.ServiceBuilder
 import com.rozan.liquordeliveryapplication.entity.Cart
 import com.rozan.liquordeliveryapplication.entity.Carts
+import com.rozan.liquordeliveryapplication.repository.CartRepository
+import com.rozan.liquordeliveryapplication.response.CartResponse
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class CartAdapter(
         val lstcart:MutableList<Carts>,
@@ -82,6 +89,35 @@ class CartAdapter(
                 holder.btnSub.isClickable=true
             }
             }
+        holder.btnDelete.setOnClickListener{
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val cartRepository = CartRepository()
+                    val response = cartRepository.deleteCart(cart._id!!)
+                    if (response.success == true) {
+                        withContext(Dispatchers.Main) {
+                            Toast.makeText(
+                                    context,
+                                    "Cart Deleted",
+                                    Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        withContext(Dispatchers.Main) {
+                            lstcart.remove(cart)
+                            notifyDataSetChanged()
+                        }
+                    }
+                } catch (ex: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(
+                                context,
+                                ex.toString(),
+                                Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
         }
 
 

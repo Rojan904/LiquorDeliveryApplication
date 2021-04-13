@@ -18,4 +18,10 @@ interface CartAPI {
     suspend fun getCart(
             @Header("Authorization") token: String
     ):Response<CartResponse>
+
+    @DELETE("cart/delete/{id}")
+    suspend fun deleteCart(
+            @Header("Authorization") token: String,
+            @Path("id") id:String
+    ):Response<CartResponse>
 }

@@ -31,9 +31,14 @@ class CartRepository:APIRequest() {
 //        return allCart
 //
 //    }
-suspend fun getCart():CartResponse{
-    return apiRequest {
-        cartAPI.getCart(ServiceBuilder.token!!)
+    suspend fun getCart():CartResponse{
+        return apiRequest {
+            cartAPI.getCart(ServiceBuilder.token!!)
+        }
     }
-}
+    suspend fun deleteCart(id:String):CartResponse{
+        return apiRequest {
+            cartAPI.deleteCart(ServiceBuilder.token!!,id)
+        }
+    }
 }
