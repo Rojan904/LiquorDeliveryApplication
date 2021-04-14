@@ -1,16 +1,22 @@
 package com.rozan.liquordeliveryapplication
 
+import android.annotation.SuppressLint
+import android.app.NotificationChannel
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.annotation.BinderThread
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.rozan.liquordeliveryapplication.api.ServiceBuilder
 import com.rozan.liquordeliveryapplication.entity.Aila
 import com.rozan.liquordeliveryapplication.entity.Cart
 import com.rozan.liquordeliveryapplication.entity.Carts
+import com.rozan.liquordeliveryapplication.model.AddToCartNotification
 import com.rozan.liquordeliveryapplication.repository.CartRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -132,8 +138,26 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
                         }
                     }
                 }
+                addtoCartNotification()
 
             }
         }
     }
+
+        private fun addtoCartNotification(){
+                val notificationManager=NotificationManagerCompat.from(this)
+                val addToCartNotification=AddToCartNotification(this)
+                addToCartNotification.createNotificationChannel()
+
+                val notification=NotificationCompat.Builder(this,addToCartNotification.CHHANEL1)
+                        .setSmallIcon(R.drawable.ic_notifications_black_24dp)
+                        .setContentTitle("Notification")
+                        .setContentText("Product Added to Cart!")
+                        .setColor(Color.BLACK)
+                        .build()
+                notificationManager.notify(1,notification)
+
+
+            }
+
 }
