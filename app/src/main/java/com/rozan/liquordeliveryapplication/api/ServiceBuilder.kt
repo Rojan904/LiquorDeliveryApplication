@@ -1,5 +1,6 @@
 package com.rozan.liquordeliveryapplication.api
 
+import com.rozan.liquordeliveryapplication.entity.Users
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -10,6 +11,7 @@ object ServiceBuilder {
     var token: String? = null
     var userId:String?=null
     var id:String?=null
+    var data:MutableList<Users>?=null
     private val okHttp = OkHttpClient.Builder()
     private val retrofitBuilder = Retrofit.Builder()
             .baseUrl(BASE_URL)

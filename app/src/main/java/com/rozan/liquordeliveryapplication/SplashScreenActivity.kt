@@ -62,6 +62,7 @@ class SplashScreenActivity : AppCompatActivity() {
                     if (response.success == true) {
                         ServiceBuilder.token = "Bearer ${response.token}"
                         ServiceBuilder.userId="${response.userId}"
+                        ServiceBuilder.data=response.data!!
                         startActivity(Intent(this@SplashScreenActivity, AilaActivity::class.java))
                         finish()
                     }

@@ -88,6 +88,7 @@ class LoginActivity : AppCompatActivity() {
                     if (response.success == true) {
                         ServiceBuilder.token = "Bearer ${response.token}"
                         ServiceBuilder.userId="${response.userId}"
+                        ServiceBuilder.data=response.data!!
                         if (checkme.isChecked) {
                             saveSharedPref()
                             startActivity(
