@@ -23,6 +23,11 @@ class AilaRepository:APIRequest() {
         val allAila:MutableList<Aila> = AilaDB.getInstance(context).getAilaDAO().getAila()
         return allAila
     }
+    suspend fun getAilaByCateg(ailaType:String):GetAllAilaResponse{
+        return apiRequest {
+            ailaAPI.getAilaByCateg(ServiceBuilder.token!!,ailaType)
+        }
+    }
 
 
 }

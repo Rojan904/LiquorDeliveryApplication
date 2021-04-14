@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.rozan.liquordeliveryapplication.AilaCategoryActivity
+import com.rozan.liquordeliveryapplication.AilaDetailsActivity
 import com.rozan.liquordeliveryapplication.R
 import com.rozan.liquordeliveryapplication.model.AilaCategory
 
@@ -43,8 +45,10 @@ class AilaCategoryAdapter(
                 .into(holder.imgCateg)
 
         holder.itemView.setOnClickListener {
-
-            context.startActivity(Intent(context,AilaCategoryActivity::class.java))
+            Toast.makeText(context, "position = " + category.categName, Toast.LENGTH_SHORT).show();
+            val intent= Intent(context, AilaCategoryActivity::class.java)
+            intent.putExtra("categ", category)
+            context.startActivity(intent)
 
         }
     }
