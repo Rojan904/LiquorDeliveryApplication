@@ -7,6 +7,7 @@ import com.rozan.liquordeliveryapplication.entity.User
 import com.rozan.liquordeliveryapplication.entity.Users
 import com.rozan.liquordeliveryapplication.response.LoginResponse
 import com.rozan.liquordeliveryapplication.response.RegistrationResponse
+import com.rozan.liquordeliveryapplication.response.UpdateUserResponse
 
 class UserRepository:APIRequest() {
     val api=ServiceBuilder.buildService(UserAPI::class.java)
@@ -18,6 +19,11 @@ class UserRepository:APIRequest() {
     suspend fun checkUser(username: String, password: String): LoginResponse {
         return apiRequest {
             api.checkUser(username, password)
+        }
+    }
+    suspend fun updateUser(_id : String, user: Users) : UpdateUserResponse{
+        return apiRequest {
+            api.updateUser(ServiceBuilder.token!!, _id, user)
         }
     }
 }
