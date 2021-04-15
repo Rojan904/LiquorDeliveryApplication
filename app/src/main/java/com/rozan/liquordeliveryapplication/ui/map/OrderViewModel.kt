@@ -1,4 +1,4 @@
-package com.rozan.liquordeliveryapplication.ui.order
+package com.rozan.liquordeliveryapplication.ui.map
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

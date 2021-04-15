@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_orders"
-        android:name="com.rozan.liquordeliveryapplication.ui.order.OrderFragment"
+        android:name="com.rozan.liquordeliveryapplication.ui.map.OrderFragment"
         android:label="@string/title_orders"
         tools:layout="@layout/fragment_order" />
 

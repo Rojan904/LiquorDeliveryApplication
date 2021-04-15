@@ -2,7 +2,7 @@
     <string name="app_name">LiquorDeliveryApplication</string>
     <string name="title_activity_aila">MainActivity</string>
     <string name="title_home">Home</string>
-    <string name="title_orders">Orders</string>
+    <string name="title_orders">Location</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_account">Account</string>
 
