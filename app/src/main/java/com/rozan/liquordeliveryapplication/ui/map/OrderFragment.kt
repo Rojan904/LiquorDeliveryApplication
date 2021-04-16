@@ -30,12 +30,12 @@ class OrderFragment : Fragment() {
          */
         mMap = googleMap
         mMap.addMarker(
-            MarkerOptions().position(LatLng(27.705188, 85.329330))
-                .title("New Kumari Khadya Store")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+            MarkerOptions().position(LatLng(27.721352, 85.3526649))
+                .title("Aila Store")
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
         )
         mMap.animateCamera(
-            CameraUpdateFactory.newLatLngZoom(LatLng(27.721431, 85.3446311), 14F), 3000, null
+            CameraUpdateFactory.newLatLngZoom(LatLng(27.721352, 85.3526649), 14F), 3000, null
         )
         mMap.uiSettings.isZoomControlsEnabled = true
     }

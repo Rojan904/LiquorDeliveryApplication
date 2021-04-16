@@ -31,11 +31,11 @@ class OrderMapFragment : Fragment() {
         mMap = googleMap
         mMap.addMarker(
                 MarkerOptions().position(LatLng(27.705188, 85.329330))
-                        .title("App development Center")
+                        .title("New Kumari  Store")
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
         )
         mMap.animateCamera(
-                CameraUpdateFactory.newLatLngZoom(LatLng(27.705188, 85.329330), 14F), 3000, null
+                CameraUpdateFactory.newLatLngZoom(LatLng(27.721431, 85.3446311), 14F), 3000, null
         )
         mMap.uiSettings.isZoomControlsEnabled = true
     }
