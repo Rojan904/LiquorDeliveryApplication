@@ -7,7 +7,8 @@ data class Users(
         var dob:String?=null,
         var username:String?=null,
         var email:String?=null,
-        var password:String?=null
+        var password:String?=null,
+        var userImage:String?=null
 ) {
 
 }

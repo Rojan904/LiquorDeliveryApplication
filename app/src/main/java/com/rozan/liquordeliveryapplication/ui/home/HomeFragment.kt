@@ -75,8 +75,72 @@ class HomeFragment : Fragment() {
     private fun ailaRecyclerView(view: View, context: Context) {
         picksRV = view.findViewById(R.id.picksRV)
         recommendedRV = view.findViewById(R.id.recommendedRV)
+        whiskyRV=view.findViewById(R.id.whiskyRV)
+        vodkaRV=view.findViewById(R.id.vodkaRV)
         loadPicks(context)
-//        loadRec(context)
+        loadRec(context)
+        loadWhisky(context)
+        loadVodka(context)
+    }
+
+    private fun loadVodka(context: Context) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val ailaRepository = AilaRepository()
+                val response = ailaRepository.getAilaByCateg("Vodka")
+                val lstRec=response.data!!
+                withContext(Dispatchers.Main) {
+                    vodkaRV.adapter = AilaAdapter(lstRec, context)
+                    vodkaRV.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                }
+
+            } catch (ex: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context,
+                        "Error : ${ex.toString()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun loadWhisky(context: Context) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val ailaRepository = AilaRepository()
+                val response = ailaRepository.getAilaByCateg("Whisky")
+                val lstRec=response.data!!
+                withContext(Dispatchers.Main) {
+                    whiskyRV.adapter = AilaAdapter(lstRec, context)
+                    whiskyRV.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                }
+
+            } catch (ex: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context,
+                        "Error : ${ex.toString()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun loadRec(context: Context) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val ailaRepository = AilaRepository()
+                val response = ailaRepository.getAilaByCateg("Rum")
+                val lstRec=response.data!!
+                withContext(Dispatchers.Main) {
+                    recommendedRV.adapter = AilaAdapter(lstRec, context)
+                    recommendedRV.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+                }
+
+            } catch (ex: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(context,
+                        "Error : ${ex.toString()}", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 
     private fun loadPicks(context: Context) {

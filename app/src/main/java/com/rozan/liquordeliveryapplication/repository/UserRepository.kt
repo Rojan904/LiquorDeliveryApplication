@@ -8,6 +8,7 @@ import com.rozan.liquordeliveryapplication.entity.Users
 import com.rozan.liquordeliveryapplication.response.LoginResponse
 import com.rozan.liquordeliveryapplication.response.RegistrationResponse
 import com.rozan.liquordeliveryapplication.response.UpdateUserResponse
+import okhttp3.MultipartBody
 
 class UserRepository:APIRequest() {
     val api=ServiceBuilder.buildService(UserAPI::class.java)
@@ -24,6 +25,12 @@ class UserRepository:APIRequest() {
     suspend fun updateUser(_id : String, user: Users) : UpdateUserResponse{
         return apiRequest {
             api.updateUser(ServiceBuilder.token!!, _id, user)
+        }
+    }
+    suspend fun uploadImage(id: String, body: MultipartBody.Part)
+            : UpdateUserResponse {
+        return apiRequest {
+            api.uploadImage(ServiceBuilder.token!!, id, body)
         }
     }
 }
