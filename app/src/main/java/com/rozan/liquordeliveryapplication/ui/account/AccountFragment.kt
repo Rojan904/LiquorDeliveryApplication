@@ -1,6 +1,7 @@
 package com.rozan.liquordeliveryapplication.ui.account
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
@@ -21,6 +22,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
+import com.rozan.liquordeliveryapplication.AilaActivity
+import com.rozan.liquordeliveryapplication.LoginActivity
 import com.rozan.liquordeliveryapplication.R
 import com.rozan.liquordeliveryapplication.api.ServiceBuilder
 import com.rozan.liquordeliveryapplication.entity.User
@@ -50,6 +53,7 @@ class AccountFragment : Fragment() {
     private lateinit var tvUsername:TextView
     private lateinit var tvMail:TextView
     private lateinit var tvDOB:TextView
+    private lateinit var tvLogout:TextView
     private lateinit var btnEdit: Button
 
     lateinit var popAddPost: Dialog
@@ -81,10 +85,11 @@ class AccountFragment : Fragment() {
             tvUsername = root.findViewById(R.id.tvUsername)
             tvMail = root.findViewById(R.id.tvMail)
             tvDOB= root.findViewById(R.id.tvDOB)
+            tvLogout= root.findViewById(R.id.tvLogout)
             profileImage = root.findViewById(R.id.profile)
 
             tvFullname.text=data[0].firstName +" "+ data[0].lastName
-            tvName.text=data[0].firstName +""+ data[0].lastName
+            tvName.text=data[0].firstName +" "+ data[0].lastName
             tvUsername.text=data[0].username
             tvMail.text=data[0].email
             tvDOB.text=data[0].dob
@@ -92,15 +97,54 @@ class AccountFragment : Fragment() {
             profileImage.setOnClickListener{
                 loadPopUpMenu()
             }
-            val imagePath = ServiceBuilder.loadImagePath() + data[0].userImage!!.split("\\")[1]
-            Glide.with(context)
-                .load(imagePath)
-                .into(profileImage)
+            tvLogout.setOnClickListener{
+                logout()
+            }
+
+
+            if (ServiceBuilder.loadImagePath() + data[0].userImage!! == " ") {
+                Glide.with(context)
+                    .load(R.drawable.img_aila)
+                    .fitCenter()
+                    .into(profileImage)
+            }
+
+                val imagePath = ServiceBuilder.loadImagePath() + data[0].userImage!!.split("\\")[1]
+                Glide.with(context)
+                    .load(imagePath)
+                    .into(profileImage)
+
+
             popupWindow(root,context)
             iniPopup(root,context,data)
         })
         return root
     }
+
+
+
+    fun logout(){
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Delete student")
+        builder.setMessage("Are you sure you want to logout??")
+        builder.setIcon(android.R.drawable.ic_delete)
+        builder.setPositiveButton("Yes") { _, _ ->
+            val preferences = requireContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE)
+            val editor = preferences.edit()
+            editor.clear()
+            editor.apply()
+            startActivity( Intent( context,  LoginActivity::class.java ) )
+        }
+        builder.setNegativeButton("No") { _, _ ->
+
+        }
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.setCancelable(false)
+        alertDialog.show()
+
+       }
+
+
     private fun popupWindow(root:View,context: Context) {
         btnEdit = root.findViewById(R.id.btnEdit)
         btnEdit.setOnClickListener {

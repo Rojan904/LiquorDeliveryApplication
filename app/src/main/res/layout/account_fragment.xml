@@ -16,7 +16,7 @@
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="330dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
             <ImageView
                 android:id="@+id/profile"
@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="20dp">
         <LinearLayout
             android:orientation="horizontal"
             android:paddingLeft="25dp"
@@ -76,7 +76,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="Full Name"/>
+                android:text="Full Name"
+                android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -96,7 +97,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="Username"/>
+                android:text="Username"
+                android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -116,7 +118,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="E-mail"/>
+                android:text="E-mail"
+                android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -136,7 +139,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"
-                android:text="Date of birth"/>
+                android:text="Date of birth"
+                android:textSize="18sp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_baseline_exit_to_app_24"
+                app:tint="@color/black"/>
+            <TextView
+                android:id="@+id/tvLogout"
+                android:textColor="@color/black"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="Logout"
+                android:textSize="18sp"/>
         </LinearLayout>
     </LinearLayout>
 
