@@ -4,11 +4,16 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.Context.SENSOR_SERVICE
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.os.Environment
@@ -20,6 +25,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.rozan.liquordeliveryapplication.AilaActivity
@@ -44,7 +50,7 @@ import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AccountFragment : Fragment() {
+class AccountFragment : Fragment(),SensorEventListener {
 
     private lateinit var accountViewModel: AccountViewModel
     private lateinit var profileImage: ImageView
@@ -67,6 +73,9 @@ class AccountFragment : Fragment() {
     private lateinit var etEmail: EditText
     private lateinit var etDOB: EditText
     private lateinit var btnSave:Button
+
+    private lateinit var sensorManager: SensorManager
+    private var proximitysensor: Sensor? = null
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -75,7 +84,7 @@ class AccountFragment : Fragment() {
         accountViewModel =
                 ViewModelProvider(this).get(AccountViewModel::class.java)
         val root = inflater.inflate(R.layout.account_fragment, container, false)
-
+        proximity()
         accountViewModel.text.observe(viewLifecycleOwner, Observer {
             val context = root.context
             val data = ServiceBuilder.data!!  // fetching user data from servicebuilder
@@ -93,6 +102,7 @@ class AccountFragment : Fragment() {
             tvUsername.text=data[0].username
             tvMail.text=data[0].email
             tvDOB.text=data[0].dob
+
 
             profileImage.setOnClickListener{
                 loadPopUpMenu()
@@ -120,20 +130,38 @@ class AccountFragment : Fragment() {
         })
         return root
     }
-
+    fun proximity(){
+        sensorManager = requireContext().getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        if(!checkSensor()){
+            return
+        }else{
+            proximitysensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
+            sensorManager.registerListener(this, proximitysensor, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+    private fun checkSensor(): Boolean{
+        var flag = true
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)==null){
+            flag=false
+        }
+        return flag
+    }
+    override fun onSensorChanged(event: SensorEvent?) {
+        val values = event!!.values[0]
+        if(values<3)
+            logoutUser()
+    }
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+    }
 
 
     fun logout(){
         val builder = AlertDialog.Builder(context)
         builder.setTitle("Delete student")
         builder.setMessage("Are you sure you want to logout??")
-        builder.setIcon(android.R.drawable.ic_delete)
+        builder.setIcon(android.R.drawable.stat_sys_warning)
         builder.setPositiveButton("Yes") { _, _ ->
-            val preferences = requireContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE)
-            val editor = preferences.edit()
-            editor.clear()
-            editor.apply()
-            startActivity( Intent( context,  LoginActivity::class.java ) )
+           logoutUser()
         }
         builder.setNegativeButton("No") { _, _ ->
 
@@ -143,6 +171,15 @@ class AccountFragment : Fragment() {
         alertDialog.show()
 
        }
+
+    private fun logoutUser() {
+        startActivity( Intent( context,  LoginActivity::class.java ) )
+        val preferences = requireContext().getSharedPreferences("MyPref", Context.MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.clear()
+        editor.apply()
+
+    }
 
 
     private fun popupWindow(root:View,context: Context) {
