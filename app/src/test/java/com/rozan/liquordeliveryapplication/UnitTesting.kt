@@ -1,5 +1,8 @@
 package com.rozan.liquordeliveryapplication
 
+import com.rozan.liquordeliveryapplication.api.ServiceBuilder
+import com.rozan.liquordeliveryapplication.entity.Cart
+import com.rozan.liquordeliveryapplication.entity.Carts
 import com.rozan.liquordeliveryapplication.entity.Users
 import com.rozan.liquordeliveryapplication.repository.AilaRepository
 import com.rozan.liquordeliveryapplication.repository.CartRepository
@@ -37,4 +40,38 @@ class UnitTesting {
         Assert.assertEquals(expectedResult,actualResult)
     }
 
+    @Test
+    fun addToCart() = runBlocking {
+        userRepository = UserRepository()
+        cartRepository = CartRepository()
+        val cart =
+            Carts(ailaQty = 2,userId = "602e47d46a2835449c4ce3d0")
+        ServiceBuilder.token ="Bearer " + userRepository.checkUser("sankar12","sankar").token
+        val expectedResult = true
+        val actualResult = cartRepository.addToCart("60660f4d8a3fc619e005105a",cart).success
+        Assert.assertEquals(expectedResult, actualResult)
+    }
+
+    @Test
+    fun getCart() = runBlocking {
+        userRepository = UserRepository()
+        cartRepository = CartRepository()
+        ServiceBuilder.token ="Bearer " + userRepository.checkUser("sankar12","sankar").token
+        ServiceBuilder.userId ="602e47d46a2835449c4ce3d0"
+        val response = cartRepository.getCart()
+        val expectedResult = true
+        val actualResult = response.success
+        Assert.assertEquals(expectedResult, actualResult)
+    }
+
+    @Test
+    fun deleteCart() = runBlocking {
+        userRepository = UserRepository()
+        cartRepository = CartRepository()
+        ServiceBuilder.token ="Bearer " + userRepository.checkUser("sankar12","sankar").token
+        val expectedResult = true
+        val response = cartRepository.deleteCart("607b0c6ca4ee7514c8148919")
+        val actualResult = response.success
+        Assert.assertEquals(expectedResult, actualResult)
+    }
 }

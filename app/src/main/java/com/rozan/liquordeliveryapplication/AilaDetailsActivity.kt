@@ -125,6 +125,7 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
                             withContext(Dispatchers.Main){
                                 Toast.makeText(this@AilaDetailsActivity, "Product added to cart", Toast.LENGTH_SHORT).show()
+                                addtoCartNotification()
                             }
                         }
                     }
@@ -138,7 +139,7 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
                         }
                     }
                 }
-                addtoCartNotification()
+
 
             }
         }
