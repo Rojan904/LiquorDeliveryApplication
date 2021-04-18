@@ -152,8 +152,12 @@ class AccountFragment : Fragment(),SensorEventListener {
             logoutUser()
     }
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        return
     }
-
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)
+    }
 
     fun logout(){
         val builder = AlertDialog.Builder(context)

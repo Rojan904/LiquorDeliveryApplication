@@ -128,19 +128,22 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                 } catch (ex: IOException) {
-                    val snack =
-                        Snackbar.make(
-                            constraintLayout,
-                            "Invalid username or password",
-                            Snackbar.LENGTH_LONG
-                        )
-                    snack.setAction("OK", View.OnClickListener {
-                        snack.dismiss()
-                    })
-                    snack.setActionTextColor(Color.WHITE)
-                    snack.setBackgroundTint(Color.parseColor("#515BD4"))
+                    withContext(Main){
+                        val snack =
+                            Snackbar.make(
+                                constraintLayout,
+                                "Invalid username or password",
+                                Snackbar.LENGTH_LONG
+                            )
+                        snack.setAction("OK", View.OnClickListener {
+                            snack.dismiss()
+                        })
+                        snack.setActionTextColor(Color.WHITE)
+                        snack.setBackgroundTint(Color.parseColor("#515BD4"))
 
-                    snack.show()
+                        snack.show()
+                    }
+
                 }
             }
         }

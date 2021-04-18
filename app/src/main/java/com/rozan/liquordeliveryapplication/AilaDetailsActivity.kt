@@ -2,7 +2,13 @@ package com.rozan.liquordeliveryapplication
 
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -24,7 +30,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
+class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener,SensorEventListener {
     private lateinit var imgAila:ImageView
     private lateinit var tvName:TextView
     private lateinit var tvType:TextView
@@ -46,7 +52,8 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
     private var ailaPrice:Double?=0.0
     private var ailaid:String?=null
 
-
+    private lateinit var sensorManager: SensorManager
+    private var gyrosensor: Sensor? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_aila_details)
@@ -63,7 +70,7 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
         ailaQty=findViewById(R.id.ailaQty)
         btnAddToCart=findViewById(R.id.btnAddCart)
 
-
+        gyrosensors()
         val intent=intent.getParcelableExtra<Aila>("aila")
         if (intent!=null){
             ailaid=intent._id
@@ -112,35 +119,35 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
             }
             R.id.btnAddCart -> {
+                addToCart()
+            }
+        }
+    }
+    private fun addToCart(){
+        val ailaQty=ailaQty.text.toString().toInt()
+        val userId = ServiceBuilder.userId!!
+        val cart= Carts(ailaQty = ailaQty,userId = userId)
 
-               val ailaQty=ailaQty.text.toString().toInt()
-                val userId = ServiceBuilder.userId!!
-                val cart= Carts(ailaQty = ailaQty,userId = userId)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val cartRepository= CartRepository()
+                val response=cartRepository.addToCart(ailaid!!,cart)
+                if (response.success==true){
 
-                CoroutineScope(Dispatchers.IO).launch {
-                    try {
-                        val cartRepository= CartRepository()
-                        val response=cartRepository.addToCart(ailaid!!,cart)
-                        if (response.success==true){
-
-                            withContext(Dispatchers.Main){
-                                Toast.makeText(this@AilaDetailsActivity, "Product added to cart", Toast.LENGTH_SHORT).show()
-                                addtoCartNotification()
-                            }
-                        }
-                    }
-                    catch (ex: Exception){
-                        withContext(Dispatchers.Main) {
-                            Toast.makeText(
-                                    this@AilaDetailsActivity,
-                                    ex.toString(),
-                                    Toast.LENGTH_SHORT
-                            ).show()
-                        }
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(this@AilaDetailsActivity, "Product added to cart", Toast.LENGTH_SHORT).show()
+                        addtoCartNotification()
                     }
                 }
-
-
+            }
+            catch (ex: Exception){
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(
+                        this@AilaDetailsActivity,
+                        ex.toString(),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
@@ -160,5 +167,34 @@ class AilaDetailsActivity : AppCompatActivity(), View.OnClickListener {
 
 
             }
+
+    fun gyrosensors(){
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        if(!checkSensor()){
+            return
+        }else{
+            gyrosensor = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)
+            sensorManager.registerListener(this, gyrosensor, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+    private fun checkSensor(): Boolean{
+        var flag = true
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE)==null){
+            flag=false
+        }
+        return flag
+    }
+    override fun onSensorChanged(event: SensorEvent?) {
+
+        val values = event!!.values[1]
+        if (values<-10){
+                addToCart()
+                startActivity(Intent(this,CartActivity::class.java))
+
+        }
+    }
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+    }
+
 
 }
